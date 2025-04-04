@@ -1,0 +1,346 @@
+<!DOCTYPE html>  <html lang="en" data-theme="dark">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Digital Portfolio | Grafix</title>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
+    <style>  
+        :root {  
+            --primary-color: #ffffff;  
+            --secondary-color: #0f0f0f;  
+            --accent-color: #2196F3; /* Blue accent */  
+            --glass: rgba(255, 255, 255, 0.05);  
+            --bg-color: #1a1a1a;  
+        }  [data-theme="light"] {  
+        --primary-color: #0f0f0f;  
+        --secondary-color: #ffffff;  
+        --glass: rgba(0, 0, 0, 0.05);  
+        --bg-color: #f5f5f5;  
+    }  
+
+    * {  
+        margin: 0;  
+        padding: 0;  
+        box-sizing: border-box;  
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);  
+    }  
+
+    body {  
+        font-family: 'Arial', sans-serif;  
+        background: var(--bg-color);  
+        color: var(--primary-color);  
+        overflow-x: hidden;  
+    }  
+
+    /* Advanced Background Effects */  
+    .geometric-overlay {  
+        position: fixed;  
+        width: 100%;  
+        height: 100%;  
+        background:   
+            radial-gradient(circle at 50% 50%,   
+                rgba(33,150,243,0.1) 0%,   
+                transparent 60%),  
+            linear-gradient(45deg,   
+                rgba(78,205,196,0.1) 50%,   
+                transparent 50%);  
+        animation: pulse 8s ease infinite;  
+        z-index: -2;  
+    }  
+
+    .floating-shapes {  
+        position: fixed;  
+        width: 100%;  
+        height: 100%;  
+        z-index: -1;  
+        overflow: hidden;  
+    }  
+
+    .shape {  
+        position: absolute;  
+        background: rgba(33,150,243,0.1);  
+        border-radius: 50%;  
+        animation: float 20s linear infinite;  
+    }  
+
+    @keyframes pulse {  
+        0%, 100% { opacity: 0.2; }  
+        50% { opacity: 0.4; transform: scale(1.2); }  
+    }  
+
+    @keyframes float {  
+        0% { transform: translateY(0) rotate(0deg); }  
+        25% { transform: translateY(-100px) rotate(90deg); }  
+        50% { transform: translateY(-200px) rotate(180deg); }  
+        75% { transform: translateY(-100px) rotate(270deg); }  
+        100% { transform: translateY(0) rotate(360deg); }  
+    }  
+
+    /* Navigation */  
+    .main-nav {  
+        padding: 1.5rem 8%;  
+        backdrop-filter: blur(12px);  
+        position: sticky;  
+        top: 0;  
+        background: rgba(15, 15, 15, 0.6);  
+        border-bottom: 1px solid var(--glass);  
+        display: flex;  
+        justify-content: space-between;  
+        align-items: center;  
+    }  
+
+    .nav-links {  
+        display: flex;  
+        gap: 2rem;  
+        align-items: center;  
+    }  
+
+    .nav-links a {  
+        color: var(--primary-color);  
+        text-decoration: none;  
+        padding: 0.5rem 1rem;  
+        border-radius: 8px;  
+        transition: background 0.3s;  
+    }  
+
+    .nav-links a:hover {  
+        background: var(--glass);  
+    }  
+
+    .logo {  
+        font-size: 1.8rem;  
+        font-weight: 700;  
+        background: linear-gradient(45deg, var(--accent-color), #4ECDC4);  
+        -webkit-background-clip: text;  
+        -webkit-text-fill-color: transparent;  
+    }  
+
+    /* Hero Section */  
+    .hero {  
+        min-height: 100vh;  
+        display: flex;  
+        flex-direction: column;  
+        justify-content: center;  
+        align-items: center;  
+        padding: 0 8%;  
+        text-align: center;  
+    }  
+
+    .hero h1 {  
+        font-size: 4rem;  
+        margin-bottom: 1.5rem;  
+        line-height: 1.2;  
+    }  
+
+    .hero p {  
+        font-size: 1.2rem;  
+        max-width: 600px;  
+        margin-bottom: 3rem;  
+        opacity: 0.9;  
+    }  
+
+    /* Buttons */  
+    .cta-button {  
+        padding: 1rem 2rem;  
+        background: var(--accent-color);  
+        border: none;  
+        border-radius: 8px;  
+        color: white;  
+        font-weight: 600;  
+        cursor: pointer;  
+        position: relative;  
+        overflow: hidden;  
+        transition: transform 0.3s, box-shadow 0.3s;  
+    }  
+
+    .cta-button:hover {  
+        transform: translateY(-3px);  
+        box-shadow: 0 5px 15px rgba(33,150,243,0.4);  
+    }  
+
+    /* Footer */  
+    footer {  
+        padding: 4rem 8%;  
+        background: var(--glass);  
+        backdrop-filter: blur(10px);  
+        margin-top: 4rem;  
+    }  
+
+    .footer-content {  
+        max-width: 1200px;  
+        margin: 0 auto;  
+        display: grid;  
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+        gap: 2rem;  
+    }  
+
+    .footer-section h3 {  
+        margin-bottom: 1.5rem;  
+        color: var(--accent-color);  
+    }  
+
+    .footer-links {  
+        display: flex;  
+        flex-direction: column;  
+        gap: 1rem;  
+    }  
+
+    .footer-links a {  
+        color: var(--primary-color);  
+        text-decoration: none;  
+        transition: opacity 0.3s;  
+    }  
+
+    .footer-links a:hover {  
+        opacity: 0.8;  
+    }  
+
+    .comment-box {  
+        width: 100%;  
+        height: 120px;  
+        padding: 1rem;  
+        margin: 1rem 0;  
+        background: var(--glass);  
+        border: 1px solid rgba(255,255,255,0.1);  
+        border-radius: 8px;  
+        color: var(--primary-color);  
+        resize: vertical;  
+    }  
+
+    /* Theme Toggle */  
+    .theme-toggle {  
+        background: var(--glass);  
+        border: 1px solid rgba(255,255,255,0.1);  
+        padding: 0.8rem;  
+        border-radius: 50%;  
+        cursor: pointer;  
+        display: flex;  
+        align-items: center;  
+        justify-content: center;  
+    }  
+
+    @media (max-width: 768px) {  
+        .nav-links {  
+            display: none;  
+        }  
+
+        .hero h1 {  
+            font-size: 2.5rem;  
+        }  
+
+        .hero p {  
+            font-size: 1rem;  
+        }  
+    }  
+</style>
+
+</head>  
+<body>  
+    <div class="geometric-overlay"></div>  
+    <div class="floating-shapes">  
+        <div class="shape" style="width: 150px; height: 150px; top: 20%; left: 10%;"></div>  
+        <div class="shape" style="width: 120px; height: 120px; top: 60%; right: 15%;"></div>  
+    </div>  <nav class="main-nav">  
+    <div class="logo">Grafix</div>  
+    <div class="nav-links">  
+        <a href="#home">Home</a>  
+        <a href="#Tool">Tool</a>  
+        <a href="#Content">Content</a>  
+        <a href="#Store">Store</a>  
+    </div>  
+    <button class="theme-toggle" onclick="toggleTheme()">  
+        <i class="fas fa-moon"></i>  
+    </button>  
+</nav>  
+
+<section class="hero" id="home">
+    <h1>Transform Your Digital Presence</h1>
+    <p>Crafting immersive experiences through innovative design and cutting-edge technology</p>
+    <div class="button-group">
+        <button class="cta-button">Explore</button>
+    </div>
+</section>
+
+<footer id="contact">  
+    <div class="footer-content">  
+        <div class="footer-section">  
+            <h3>Quick Links</h3>  
+            <div class="footer-links">  
+                <a href="#home">Home</a>  
+                <a href="#about">About Us</a>  
+                <a href="#projects">Projects</a>  
+                <a href="#contact">Contact</a>  
+            </div>  
+        </div>  
+        <div class="footer-section">  
+            <h3>Legal</h3>  
+            <div class="footer-links">  
+                <a href="#privacy">Privacy Policy</a>  
+                <a href="#terms">Terms of Service</a>  
+                <a href="#disclaimer">Disclaimer</a>  
+            </div>  
+        </div>  
+        <div class="footer-section">  
+            <h3>Connect</h3>  
+            <div class="footer-links">  
+                <a href="mailto:contact@grafix.com">contact@grafix.com</a>  
+                <a href="tel:+1234567890">+1 (234) 567-890</a>  
+                <div class="social-links">  
+                    <a href="#"><i class="fab fa-facebook"></i></a>  
+                    <a href="#"><i class="fab fa-twitter"></i></a>  
+                    <a href="#"><i class="fab fa-instagram"></i></a>  
+                    <a href="#"><i class="fab fa-linkedin"></i></a>  
+                </div>  
+            </div>  
+        </div>  
+    </div>  
+    <textarea class="comment-box" placeholder="Your message..."></textarea>  
+    <button class="cta-button" style="width: 100%;">Send Message</button>  
+</footer>  
+
+<script>  
+    // Theme Management  
+    function toggleTheme() {  
+        const currentTheme = document.documentElement.getAttribute('data-theme');  
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';  
+        document.documentElement.setAttribute('data-theme', newTheme);  
+        localStorage.setItem('theme', newTheme);  
+        document.querySelector('.theme-toggle i').className =   
+            newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';  
+    }  
+
+    // Load saved theme  
+    const savedTheme = localStorage.getItem('theme') || 'dark';  
+    document.documentElement.setAttribute('data-theme', savedTheme);  
+    document.querySelector('.theme-toggle i').className =   
+        savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';  
+
+    // Parallax Effect  
+    document.addEventListener('mousemove', (e) => {  
+        const x = (window.innerWidth - e.pageX) / 30;  
+        const y = (window.innerHeight - e.pageY) / 30;  
+        document.querySelector('.geometric-overlay').style.transform =   
+            `translate(${x}px, ${y}px)`;  
+    });  
+
+    // Generate floating shapes  
+    function createFloatingShapes() {  
+        const container = document.querySelector('.floating-shapes');  
+        for(let i = 0; i < 5; i++) {  
+            const shape = document.createElement('div');  
+            shape.className = 'shape';  
+            shape.style.cssText = `  
+                width: ${Math.random() * 100 + 50}px;  
+                height: ${Math.random() * 100 + 50}px;  
+                top: ${Math.random() * 100}%;  
+                left: ${Math.random() * 100}%;  
+                animation-duration: ${Math.random() * 20 + 15}s;  
+            `;  
+            container.appendChild(shape);  
+        }  
+    }  
+    createFloatingShapes();  
+</script>
+
+</body>  
+</html>  
